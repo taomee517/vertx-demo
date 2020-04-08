@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    /**先从本地仓库查找jar包*/
+    mavenLocal()
+
+    /**再从aliyun镜像下载依赖jar包*/
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+
+    /**再从maven中央仓库下载依赖jar包*/
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // vertx-core
+    compile group: 'io.vertx', name: 'vertx-core', version: '3.9.0'
+    // vertx-web
+    compile group: 'io.vertx', name: 'vertx-web', version: '3.9.0'
+
+
+    /**lombok*/
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    testCompileOnly 'org.projectlombok:lombok:1.18.10'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
